@@ -1,6 +1,6 @@
 """ This is a test webdriver """
-from selenium import webdriver
-import csv
+from selenium import webdriver, common
+# import csv
 
 URL_LAZADA_VN = "http://www.lazada.vn"
 URL_LAZADA_SG = "http://www.lazada.sg"
@@ -18,9 +18,43 @@ URL_ALL_DOMAINS = [
     URL_LAZADA_ID
 ]
 
-BROWSER = webdriver.Chrome()
+SAMPLE_SKU = "XI431ELAA4RBY2VNAMZ-8760830"
 
-for current_domain in URL_ALL_DOMAINS:
-    BROWSER.get(current_domain)
+SEARCH_PATH = "/catalog/?q="
 
-BROWSER.quit()
+SAMPLE_XPATH = "//div[contains(@class, 'c-product-card__description')]/a"
+
+""" runSelenium is the main driver """
+class runSelenium():
+    def __init__(self):
+        print("STARTING SELENIUM")
+        self.browser = webdriver.Chrome()
+
+    # isElementPresent blah blah
+    def isElementPresent(self, locator):
+        try:
+            self.browser.find_element_by_xpath(locator)
+            return True
+        except common.exceptions.NoSuchElementException:
+            return False
+
+    # selenium blah blah
+    def selenium(self):
+        driver = self.browser
+
+        for current_domain in URL_ALL_DOMAINS:
+            search_url = current_domain + SEARCH_PATH + SAMPLE_SKU
+            driver.get(search_url)
+
+            if self.isElementPresent(SAMPLE_XPATH):
+                description = driver.find_element_by_xpath(SAMPLE_XPATH)
+                print(description.get_attribute('href'))
+            else:
+                print('Cant find SKU = ' + SAMPLE_SKU + ' on domain ' + current_domain)
+
+        print("STOPPING SELENIUM")
+        driver.quit()
+
+if __name__ == '__main__':
+    RUN = runSelenium()
+    RUN.selenium()
