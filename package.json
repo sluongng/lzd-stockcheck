@@ -1,0 +1,23 @@
+{
+    "name": "lzd-stockcheck",
+    "version": "1.0.0",
+    "description": "a python project to check stock based on SKU on lazada website",
+    "main": "index.js",
+    "scripts": {
+        "debug": "node --inspect index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sluongng/lzd-stockcheck.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sluongng/lzd-stockcheck/issues"
+    },
+    "homepage": "https://github.com/sluongng/lzd-stockcheck#readme",
+    "dependencies": {
+        "selenium-webdriver": "^3.5.0"
+    }
+}
