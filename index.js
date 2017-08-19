@@ -18,4 +18,5 @@ let driver = new Builder()
 driver.get(URL_LAZADA_VN)
     .then(_ => driver.findElement(By.css("input[class*='textbox_search']")).sendKeys(SAMPLE_SKU, Key.RETURN))
     .then(_ => driver.wait(until.titleContains(SAMPLE_SKU), 1000))
-    .then(_ => driver.quit);
+    .then(_ => driver.get(driver.findElement(By.css(image_link_selector)).getAttribute("href")))
+    .then(_ => driver.quit());
